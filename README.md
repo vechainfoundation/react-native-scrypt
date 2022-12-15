@@ -13,14 +13,16 @@ This plugin is for use with React Native and allows your application to use scry
 
 `$ npm install react-native-scrypt --save`
 
-### Mostly automatic installation
+`npx pod-install`
+
+### Mostly automatic installation - Deprecated
 
 `$ react-native link react-native-scrypt`
 
 ### Manual installation
 
 
-#### iOS
+#### iOS - Deprecated
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 2. Go to `node_modules` ➜ `react-native-scrypt` and add `RNScrypt.xcodeproj`
@@ -29,9 +31,9 @@ This plugin is for use with React Native and allows your application to use scry
 
 #### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.crypho.scrypt.RNScryptPackage;` to the imports at the top of the file
-  - Add `new RNScryptPackage()` to the list returned by the `getPackages()` method
+1. Open up `android/app/src/main/java/[...]/MainApplication.java`
+  - Add `import com.crypho.scrypt.RNScryptPackage;` to the imports at the top of the file - **Deprecated**
+  - Add `new RNScryptPackage()` to the list returned by the `getPackages()` method - **Deprecated**
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-scrypt'
@@ -39,8 +41,16 @@ This plugin is for use with React Native and allows your application to use scry
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-scrypt')
+      implementation project(':react-native-scrypt')
   	```
+    
+### node_modules - only if not statically loaded
+
+1. Open `node_modules/react-native-scrypt/android/build.gradle` 
+  - Change `compile 'com.facebook.react:react-native:+'` in the `dependencies` object to `implementation com.facebook.react:react-native:+`
+  - Add `ndkVersion "21.4.7075529"` on the `android` object
+  - Add `compileSdkVersion safeExtGet('compileSdkVersion', 23)` to the `defaultConfig` object
+
 
 ## Usage
 ```javascript
